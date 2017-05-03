@@ -1,0 +1,22 @@
+{
+  "name": "minimal-pwa",
+  "version": "0.0.1",
+  "description": "A Minimal PWA for Demo",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chenzhihao/Minimal-PWA.git"
+  },
+  "keywords": [
+    "PWA"
+  ],
+  "author": "cabtravis@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chenzhihao/Minimal-PWA/issues"
+  },
+  "homepage": "https://github.com/chenzhihao/Minimal-PWA#readme"
+}

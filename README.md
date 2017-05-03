@@ -15,8 +15,6 @@ http-server -c-1 # with cache disabled
 
 Then open <http://localhost:8080> with Chrome.
 
-Change `cacheStorageKey` in `sw.js` to update app version.
-
 ### Trouble shooting
 
 * Why `-c-1` to disable cache?
