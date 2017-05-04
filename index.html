@@ -12,29 +12,43 @@
   <div class="main-text">
     Minimal PWA, open Console for more!
   </div>
+  <div>
+    <button id="fake-post">do post</button>
+  </div>
   <div class="network-message">
     Network:
-    <span id="network-status" class="">Good</span>
+    <span id="network-status" class=""></span>
   </div>
   <script type="text/javascript">
-    var version = 5
+    var version = 2
     document.querySelector('.revision').innerHTML = 'Revision ' + version
 
     if (navigator.serviceWorker != null) {
       navigator.serviceWorker.register('sw.js?v=' + version)
         .then(function (registration) {
-          console.log('Registered events at scope: ', registration.scope);
-        });
+          console.log('Registered events at scope: ', registration.scope)
+        })
     }
+
+    var counter = 1
+    navigator.serviceWorker.ready.then(function (registration) {
+      document.getElementById('fake-post').addEventListener('click', e => {
+        registration.sync.register('outbox: ' + counter++)
+      })
+    })
 
     fetch('./data.json')
       .then(res => res.json())
       .then(res => console.log(res))
 
-    var statusEl = document.querySelector('#network-status')
-    if (!navigator.onLine) {
-      statusEl.classList = ['is-offline']
-      statusEl.innerText = 'Offline'
+    function updateOnlineStatus() {
+      var statusEl = document.querySelector('#network-status')
+      statusEl.innerText = navigator.onLine ? 'Online' : ' Offline'
     }
+
+    updateOnlineStatus();
+
+    window.addEventListener('online', updateOnlineStatus);
+    window.addEventListener('offline', updateOnlineStatus);
   </script>
 </body>

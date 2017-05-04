@@ -1,6 +1,6 @@
 
 console.log('Script loaded!')
-var cacheStorageKey = 'minimal-pwa-4'
+var cacheStorageKey = 'minimal-pwa-1'
 
 var cacheList = [
   '/',
@@ -23,6 +23,23 @@ self.addEventListener('install', function (e) {
       return self.skipWaiting()
     })
   )
+})
+
+function fetchGithubUsers() {
+  return fetch('https://api.github.com/users')
+    .then(function (response) {
+      return response.json()
+    })
+    .then(function (users) {
+      console.log('Request successful', users)
+    })
+    .catch(function (error) {
+      console.log('Request failed', error)
+    })
+}
+
+self.addEventListener('sync', function (e) {
+  e.waitUntil(fetchGithubUsers())
 })
 
 self.addEventListener('activate', function (e) {
